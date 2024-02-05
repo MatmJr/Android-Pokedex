@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.android_pokedex.R
+import br.com.android_pokedex.api.PokemonRepository
 import br.com.android_pokedex.domain.Pokemon
 import br.com.android_pokedex.domain.PokemonType
 
@@ -20,9 +21,11 @@ class MainActivity : AppCompatActivity() {
                 "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png",
                 1,
                 "Bulbasaur",
-                listOf(PokemonType("Grass"),PokemonType("Poison"))
+                listOf(PokemonType("Grass"), PokemonType("Poison"))
             )
         )
+
+        val pokemonsApi = PokemonRepository.listPokemons()
 
         val layoutManager = LinearLayoutManager(this)
 

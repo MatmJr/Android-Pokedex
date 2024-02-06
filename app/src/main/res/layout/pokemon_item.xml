@@ -21,11 +21,10 @@
 
         <ImageView
             android:id="@+id/ivPokemon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/bulbasaur"
             android:contentDescription="@string/pokemon_image"
             app:layout_constraintBottom_toTopOf="@+id/tvNumber"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +66,7 @@
                 android:id="@+id/tvType1"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:background="#8FD392"
+                android:background="#C3C3C3"
                 android:textAlignment="center"
                 android:textColor="#313131"
                 android:textSize="12sp"
@@ -78,9 +77,9 @@
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:background="#AC7BB5"
+                android:background="#C3C3C3"
                 android:textAlignment="center"
-                android:textColor="#FFFFFF"
+                android:textColor="#313131"
                 android:textSize="12sp"
                 tools:text="Poison" />
         </LinearLayout>

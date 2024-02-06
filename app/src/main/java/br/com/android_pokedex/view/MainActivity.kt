@@ -2,34 +2,36 @@ package br.com.android_pokedex.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.android_pokedex.R
-import br.com.android_pokedex.api.PokemonRepository
 import br.com.android_pokedex.domain.Pokemon
-import br.com.android_pokedex.domain.PokemonType
+import br.com.android_pokedex.viewmodel.PokemonViewModel
+import br.com.android_pokedex.viewmodel.PokemonViewModelFactory
 
 class MainActivity : AppCompatActivity() {
+
+    private val recyclerView by lazy {
+        findViewById<RecyclerView>(R.id.rvPokemon)
+    }
+
+    private val viewModel by lazy {
+        ViewModelProvider(this, PokemonViewModelFactory()).get(PokemonViewModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.rvPokemon)
-
-        val pokemons = listOf(
-            Pokemon(
-                "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png",
-                1,
-                "Bulbasaur",
-                listOf(PokemonType("Grass"), PokemonType("Poison"))
-            )
-        )
-
-        val pokemonsApi = PokemonRepository.listPokemons()
-
-        val layoutManager = LinearLayoutManager(this)
-
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = PokemonAdapter(pokemons)
+        viewModel.pokemons.observe(this, Observer {
+            loadRecyclerView(it)
+        })
     }
+
+    private fun loadRecyclerView(pokemons: List<Pokemon?>){
+            recyclerView.layoutManager = LinearLayoutManager(this)
+            recyclerView.adapter = PokemonAdapter(pokemons)
+        }
 }
